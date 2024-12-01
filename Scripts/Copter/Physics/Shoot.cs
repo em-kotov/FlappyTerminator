@@ -5,9 +5,7 @@ using UnityEngine;
 public class Shoot : MonoBehaviour
 {
     [SerializeField] private Bullet _bulletPrefab;
-    [SerializeField] private float _fireForce = 10f;
     [SerializeField] private float _bulletSpeed = 0.5f;
-    [SerializeField] private float _bulletOffsetX = 6f;
     [SerializeField] private Transform _shootTarget;
 
     private List<Bullet> _activeBullets = new List<Bullet>();
@@ -17,8 +15,6 @@ public class Shoot : MonoBehaviour
         DestroyOldBullets();
 
         Bullet bullet = Instantiate(_bulletPrefab, transform.position, Quaternion.identity);
-        // bullet.Rigidbody.AddForce(transform.right * _fireForce, ForceMode2D.Impulse);
-        // bullet.SetEndPosition(new Vector2(transform.position.x + _bulletOffsetX, 0));
         bullet.SetEndPosition(_shootTarget.position);
         bullet.SetStartPosition(transform.position);
         bullet.SetMoveCoroutine(StartCoroutine(MoveBullet(bullet)));
@@ -27,14 +23,16 @@ public class Shoot : MonoBehaviour
 
     public void ClearAllBullets()
     {
-        foreach (Bullet bullet in _activeBullets)
+        if (_activeBullets.Count > 0)
         {
-            if (bullet != null)
-                ClearSingleBullet(bullet);
-                // Destroy(bullet.gameObject);
-        }
+            for (int i = 0; i < _activeBullets.Count; i++)
+            {
+                if (_activeBullets[i] != null)
+                    ClearSingleBullet(_activeBullets[i]);
+            }
 
-        _activeBullets.Clear();
+            _activeBullets.Clear();
+        }
     }
 
     private void DestroyOldBullets()
@@ -42,11 +40,7 @@ public class Shoot : MonoBehaviour
         for (int i = 0; i < _activeBullets.Count; i++)
         {
             if (CanDestroy(_activeBullets[i]))
-            {
-                // Destroy(_activeBullets[i].gameObject);
-                // _activeBullets.RemoveAt(i);
                 ClearSingleBullet(_activeBullets[i]);
-            }
         }
     }
 
@@ -71,13 +65,16 @@ public class Shoot : MonoBehaviour
         if (bullet.MoveCoroutine != null)
             StopCoroutine(MoveBullet(bullet));
 
-        Destroy(bullet.gameObject);
-        _activeBullets.Remove(bullet);
+        if (bullet != null)
+        {
+            Destroy(bullet.gameObject);
+            _activeBullets.Remove(bullet);
+        }
     }
 
     private bool CanDestroy(Bullet bullet)
     {
-        if (bullet.transform.position.x >= bullet.EndPosition.x)
+        if (bullet.transform.position.x >= bullet.EndPosition.x && bullet != null)
             return true;
 
         return false;
