@@ -5,7 +5,7 @@ public class Copter : MonoBehaviour
 {
     public event Action GameOver;
 
-    public void OnGroundFound()
+    public void OnObstacleFound()
     {
         GameOver?.Invoke();
     }

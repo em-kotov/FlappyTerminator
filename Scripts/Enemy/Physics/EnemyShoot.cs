@@ -1,14 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyShoot : MonoBehaviour
+public class EnemyShoot : Shoot
 {
-    [SerializeField] private EnemyBullet _bulletPrefab;
-    [SerializeField] private float _fireForce = 10f;
     [SerializeField] private float _fireInterval = 1.2f;
-
-    private List<EnemyBullet> _activeBullets = new List<EnemyBullet>();
+    [SerializeField] private float _bulletOffset = -4f;
 
     private void Start()
     {
@@ -18,18 +14,7 @@ public class EnemyShoot : MonoBehaviour
     public void Deactivate()
     {
         StopCoroutine(FireBullet());
-        ClearAllBullets();
-    }
-
-    private void ClearAllBullets()
-    {
-        for (int i = 0; i < _activeBullets.Count; i++)
-        {
-            if (_activeBullets[i] != null)
-                Destroy(_activeBullets[i].gameObject);
-        }
-
-        _activeBullets.Clear();
+        DestroyAllBullets();
     }
 
     private IEnumerator FireBullet()
@@ -38,9 +23,11 @@ public class EnemyShoot : MonoBehaviour
 
         while (enabled)
         {
-            EnemyBullet bullet = Instantiate(_bulletPrefab, transform.position, Quaternion.identity);
+            Bullet bullet = Instantiate(_bulletPrefab, transform.position, Quaternion.identity);
+            bullet.SetEndPosition(new Vector2(transform.position.x + _bulletOffset, transform.position.y));
+            bullet.SetStartPosition(transform.position);
+            bullet.SetMoveCoroutine(StartCoroutine(MoveBullet(bullet)));
             _activeBullets.Add(bullet);
-            bullet.Rigidbody.AddForce(transform.right * -1 * _fireForce, ForceMode2D.Impulse);
 
             yield return wait;
         }

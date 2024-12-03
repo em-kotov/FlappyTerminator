@@ -5,7 +5,8 @@ using UnityEngine;
 public class CollisionRegister : MonoBehaviour
 {
     public event Action GroundFound;
-    // public event Action BulletFound;
+    public event Action BulletFound;
+    public event Action EnemyFound;
     public event Action<Star> StarFound;
     public event Action<ZoneController, float> NextZoneControllerFound;
 
@@ -28,11 +29,17 @@ public class CollisionRegister : MonoBehaviour
                 NextZoneControllerFound?.Invoke(interactable as ZoneController,
                                                     transform.position.x);
 
-            if (interactable is Enemy){}
+            if (interactable is Enemy)
+            {
+                EnemyFound?.Invoke();
                 // Debug.Log("Enemy collision");
+            }
 
-            if (interactable is EnemyBullet){}
+            if (interactable is Bullet)
+            {
+                BulletFound?.Invoke();
                 // Debug.Log("Enemy bullet collision");
+            }
         }
     }
 }

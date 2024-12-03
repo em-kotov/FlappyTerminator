@@ -5,7 +5,7 @@ public class Subscriber : MonoBehaviour
     [SerializeField] private InputReader _inputReader;
     [SerializeField] private CollisionRegister _collisionRegister;
     [SerializeField] private Mover _mover;
-    [SerializeField] private Shoot _shoot;
+    [SerializeField] private PlayerShoot _shoot;
     [SerializeField] private Copter _copter;
     [SerializeField] private Inventory _inventory;
     [SerializeField] private InventoryDisplay _inventoryDisplay;
@@ -18,7 +18,10 @@ public class Subscriber : MonoBehaviour
         _inputReader.JumpKeyPressed += _restartWindow.OnRestarButtonClick;
         _inputReader.ShootKeyPressed += _shoot.FireBullet;
 
-        _collisionRegister.GroundFound += _copter.OnGroundFound;
+        _collisionRegister.GroundFound += _copter.OnObstacleFound;
+        _collisionRegister.EnemyFound += _copter.OnObstacleFound;
+        _collisionRegister.BulletFound += _copter.OnObstacleFound;
+
         _collisionRegister.StarFound += _inventory.AddStar;
         _collisionRegister.NextZoneControllerFound += _zoneSwitcher.SwitchToNext;
 
@@ -28,7 +31,7 @@ public class Subscriber : MonoBehaviour
 
         _restartWindow.RestartClicked += _inventory.Reset;
         _restartWindow.RestartClicked += _mover.Reset;
-        _restartWindow.RestartClicked += _shoot.ClearAllBullets;
+        _restartWindow.RestartClicked += _shoot.DestroyAllBullets;
         _restartWindow.RestartClicked += _zoneSwitcher.ResetZones;
     }
 
@@ -38,7 +41,10 @@ public class Subscriber : MonoBehaviour
         _inputReader.JumpKeyPressed -= _restartWindow.OnRestarButtonClick;
         _inputReader.ShootKeyPressed -= _shoot.FireBullet;
 
-        _collisionRegister.GroundFound -= _copter.OnGroundFound;
+        _collisionRegister.GroundFound -= _copter.OnObstacleFound;
+        _collisionRegister.EnemyFound -= _copter.OnObstacleFound;
+        _collisionRegister.BulletFound -= _copter.OnObstacleFound;
+
         _collisionRegister.StarFound -= _inventory.AddStar;
         _collisionRegister.NextZoneControllerFound -= _zoneSwitcher.SwitchToNext;
 
@@ -48,7 +54,7 @@ public class Subscriber : MonoBehaviour
 
         _restartWindow.RestartClicked -= _inventory.Reset;
         _restartWindow.RestartClicked -= _mover.Reset;
-        _restartWindow.RestartClicked -= _shoot.ClearAllBullets;
+        _restartWindow.RestartClicked -= _shoot.DestroyAllBullets;
         _restartWindow.RestartClicked -= _zoneSwitcher.ResetZones;
     }
 }
