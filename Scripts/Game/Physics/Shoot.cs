@@ -6,8 +6,14 @@ public class Shoot : MonoBehaviour
 {
     [SerializeField] protected Bullet _bulletPrefab;
     [SerializeField] protected float _bulletSpeed = 0.5f;
+    [SerializeField] protected BulletSpawner BulletSpawner;
 
     protected List<Bullet> _activeBullets = new List<Bullet>();
+
+    private void Awake()
+    {
+        BulletSpawner.SetPrefab(_bulletPrefab);
+    }
 
     public void DestroyAllBullets()
     {
@@ -30,10 +36,13 @@ public class Shoot : MonoBehaviour
 
         if (bullet != null)
         {
-            Destroy(bullet.gameObject);
+            // Destroy(bullet.gameObject); //release
+            BulletSpawner.Pool.Release(bullet);
             _activeBullets.Remove(bullet);
         }
-    }
+    } // when restart is quick and often ->>
+        //error "you trying release object that has already been released"
+        // make enemy pool, may be it helps
 
     protected IEnumerator MoveBullet(Bullet bullet)
     {

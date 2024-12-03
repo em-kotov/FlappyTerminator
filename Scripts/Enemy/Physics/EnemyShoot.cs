@@ -23,7 +23,8 @@ public class EnemyShoot : Shoot
 
         while (enabled)
         {
-            Bullet bullet = Instantiate(_bulletPrefab, transform.position, Quaternion.identity);
+            // Bullet bullet = Instantiate(_bulletPrefab, transform.position, Quaternion.identity); //get
+            Bullet bullet = BulletSpawner.Pool.Get();
             bullet.SetEndPosition(new Vector2(transform.position.x + _bulletOffset, transform.position.y));
             bullet.SetStartPosition(transform.position);
             bullet.SetMoveCoroutine(StartCoroutine(MoveBullet(bullet)));

@@ -26,7 +26,7 @@ public abstract class Spawner<T> : MonoBehaviour where T : MonoBehaviour
 
     virtual protected void DestroyItem(T item)
     {
-        Destroy(item.gameObject);
+        Destroy(item.gameObject); //release
     }
 
     virtual protected void Create(Vector3 position) { }

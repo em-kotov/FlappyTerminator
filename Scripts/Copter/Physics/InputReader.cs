@@ -4,7 +4,7 @@ using UnityEngine;
 public class InputReader : MonoBehaviour
 {
     private const KeyCode JumpKey = KeyCode.W;
-    private const KeyCode ShootKey = KeyCode.R;
+    private const KeyCode ShootKey = KeyCode.Space;
 
     public event Action JumpKeyPressed;
     public event Action ShootKeyPressed;
