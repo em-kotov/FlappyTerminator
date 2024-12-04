@@ -24,6 +24,7 @@ public class Enemy : MonoBehaviour, IInteractable
     public void Initialize(Vector3 startPosition, Vector3 endPosition)
     {
         _mover.Initialize(startPosition, endPosition);
+        _shoot.Activate();
     }
 
     public void OnShot()
@@ -33,12 +34,11 @@ public class Enemy : MonoBehaviour, IInteractable
     
     public void OnStarFound(Star star)
     {
-        star.gameObject.SetActive(false);
+        star.InvokeCollected();
     }
 
     public void Deactivate()
     {
         _shoot.Deactivate();
-        Destroy(gameObject);
     }
 }

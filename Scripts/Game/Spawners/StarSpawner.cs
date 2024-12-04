@@ -1,16 +1,27 @@
 using UnityEngine;
 
-public class StarSpawner : Spawner<Star>
+public class StarSpawner : ZoneSpawner<Star>
 {
-    override protected void Create(Vector3 position)
+    protected override void Create(Vector3 position)
     {
         int count = RandomExtensions.GetRandomNumber(1, Count);
 
         for (int i = 0; i < count; i++)
         {
-            Star star = Instantiate(Prefab, position, Quaternion.identity); //get
+            Star star = Pool.Pool.Get();
+            star.Collected += OnCollected;
             star.transform.position = RandomExtensions.GetRandomPosition(position, Radius);
-            ActiveObjects.Add(star);
+            AddActive(star);
+        }
+    }
+
+    private void OnCollected(Star star)
+    {
+        if (star != null && ActiveObjects.Contains(star))
+        {
+            star.Collected -= OnCollected;
+            star.Deactivate();
+            DestroySingleItem(star);
         }
     }
 }

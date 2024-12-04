@@ -26,8 +26,8 @@ public class ZoneController : MonoBehaviour, IInteractable
 
     public void ClearAllObjects()
     {
-        _starSpawner.ClearAllObjects();
-        _enemySpawner.ClearAllObjects();
+        _starSpawner.DestroyAllObjects();
+        _enemySpawner.DestroyAllObjects();
     }
 
     public void ResetPosition(Vector3 position)

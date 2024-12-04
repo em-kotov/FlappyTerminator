@@ -29,15 +29,7 @@ public class Mover : MonoBehaviour
     private void Update()
     {
         RotateOverTime();
-        // TempMove();
     }
-
-    // private void TempMove()
-    // {
-    //     // also put constraint on y axis, delete after enemy done
-    //     transform.position = Vector2.MoveTowards(transform.position, new Vector2(100, 0),
-    //                                             Time.deltaTime * _speed);
-    // }
 
     public void Jump()
     {

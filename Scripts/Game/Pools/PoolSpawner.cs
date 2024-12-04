@@ -8,6 +8,9 @@ public abstract class PoolSpawner<T> : MonoBehaviour where T : MonoBehaviour
     private int _poolMaxSize = 15;
 
     public ObjectPool<T> Pool { get; private set; }
+    public int TotalQuantity { get; private set; }
+    public int CreatedQuantity { get; private set; }
+    public int ActiveQuantity { get; private set; }
 
     private void Awake()
     {
@@ -19,6 +22,10 @@ public abstract class PoolSpawner<T> : MonoBehaviour where T : MonoBehaviour
             collectionCheck: true,
             defaultCapacity: _poolCapacity,
             maxSize: _poolMaxSize);
+
+        TotalQuantity = 0;
+        CreatedQuantity = 0;
+        ActiveQuantity = 0;
     }
 
     public void SetPrefab(T prefab)
@@ -28,16 +35,20 @@ public abstract class PoolSpawner<T> : MonoBehaviour where T : MonoBehaviour
 
     private void OnGet(T item)
     {
+        TotalQuantity++;
+        ActiveQuantity++;
         item.gameObject.SetActive(true);
     }
 
     private void OnRelease(T item)
     {
+        ActiveQuantity--;
         item.gameObject.SetActive(false);
     }
 
     private T OnCreate()
     {
+        CreatedQuantity++;
         return Instantiate(_prefab);
     }
 }

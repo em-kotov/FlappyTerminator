@@ -9,7 +9,7 @@ public class Inventory : MonoBehaviour
 
     public void AddStar(Star star)
     {
-        star.gameObject.SetActive(false);
+        star.InvokeCollected();
         StarCount++;
         StarCountChanged?.Invoke(StarCount);
     }

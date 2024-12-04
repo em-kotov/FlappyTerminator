@@ -6,15 +6,26 @@ public class EnemyShoot : Shoot
     [SerializeField] private float _fireInterval = 1.2f;
     [SerializeField] private float _bulletOffset = -4f;
 
-    private void Start()
+    private Coroutine _fireCoroutine;
+
+    public void Activate()
     {
-        StartCoroutine(FireBullet());
+        _fireCoroutine = StartCoroutine(FireBullet());
     }
 
     public void Deactivate()
     {
-        StopCoroutine(FireBullet());
+        StopFireCoroutine();
         DestroyAllBullets();
+    }
+
+    private void StopFireCoroutine()
+    {
+        if (_fireCoroutine != null)
+        {
+            StopCoroutine(FireBullet());
+            _fireCoroutine = null;
+        }
     }
 
     private IEnumerator FireBullet()
@@ -23,14 +34,15 @@ public class EnemyShoot : Shoot
 
         while (enabled)
         {
-            // Bullet bullet = Instantiate(_bulletPrefab, transform.position, Quaternion.identity); //get
             Bullet bullet = BulletSpawner.Pool.Get();
             bullet.SetEndPosition(new Vector2(transform.position.x + _bulletOffset, transform.position.y));
             bullet.SetStartPosition(transform.position);
             bullet.SetMoveCoroutine(StartCoroutine(MoveBullet(bullet)));
-            _activeBullets.Add(bullet);
+            AddActive(bullet);
 
             yield return wait;
         }
+
+        _fireCoroutine = null;
     }
 }

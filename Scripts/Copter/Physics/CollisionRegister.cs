@@ -30,16 +30,10 @@ public class CollisionRegister : MonoBehaviour
                                                     transform.position.x);
 
             if (interactable is Enemy)
-            {
                 EnemyFound?.Invoke();
-                // Debug.Log("Enemy collision");
-            }
 
             if (interactable is Bullet)
-            {
                 BulletFound?.Invoke();
-                // Debug.Log("Enemy bullet collision");
-            }
         }
     }
 }

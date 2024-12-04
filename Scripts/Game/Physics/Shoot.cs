@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+using System;
 
 public class Shoot : MonoBehaviour
 {
     [SerializeField] protected Bullet _bulletPrefab;
     [SerializeField] protected float _bulletSpeed = 0.5f;
-    [SerializeField] protected BulletSpawner BulletSpawner;
+    [SerializeField] protected BulletPool BulletSpawner;
 
-    protected List<Bullet> _activeBullets = new List<Bullet>();
+    protected HashSet<Bullet> _activeBullets = new HashSet<Bullet>();
 
     private void Awake()
     {
@@ -17,32 +19,34 @@ public class Shoot : MonoBehaviour
 
     public void DestroyAllBullets()
     {
-        if (_activeBullets.Count > 0)
-        {
-            for (int i = 0; i < _activeBullets.Count; i++)
-            {
-                if (_activeBullets[i] != null)
-                    DestroySingleBullet(_activeBullets[i]);
-            }
+        Array itemsToDestroy = _activeBullets.ToArray();
 
-            _activeBullets.Clear();
-        }
+        foreach (Bullet item in itemsToDestroy)
+            DestroySingleBullet(item);
+
+        _activeBullets.Clear();
     }
 
     protected void DestroySingleBullet(Bullet bullet)
     {
-        if (bullet.MoveCoroutine != null)
-            StopCoroutine(MoveBullet(bullet));
-
-        if (bullet != null)
+        if (bullet != null && bullet.gameObject.activeInHierarchy && _activeBullets.Contains(bullet))
         {
-            // Destroy(bullet.gameObject); //release
-            BulletSpawner.Pool.Release(bullet);
+            if (bullet.MoveCoroutine != null)
+            {
+                StopCoroutine(MoveBullet(bullet));
+                bullet.ResetMoveCoroutine();
+            }
+
             _activeBullets.Remove(bullet);
+            BulletSpawner.Pool.Release(bullet);
         }
-    } // when restart is quick and often ->>
-        //error "you trying release object that has already been released"
-        // make enemy pool, may be it helps
+    }
+
+    protected virtual void AddActive(Bullet item)
+    {
+        if (item != null && _activeBullets.Contains(item) == false)
+            _activeBullets.Add(item);
+    }
 
     protected IEnumerator MoveBullet(Bullet bullet)
     {
@@ -56,7 +60,10 @@ public class Shoot : MonoBehaviour
             yield return null;
         }
 
-        bullet.ResetMoveCoroutine();
-        DestroySingleBullet(bullet);
+        if (bullet != null)
+        {
+            bullet.ResetMoveCoroutine();
+            DestroySingleBullet(bullet);
+        }
     }
 }
