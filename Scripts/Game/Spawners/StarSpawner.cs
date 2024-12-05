@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class StarSpawner : ZoneSpawner<Star>
+public class StarSpawner : Spawner<Star>
 {
     protected override void Create(Vector3 position)
     {
-        int count = RandomExtensions.GetRandomNumber(1, Count);
+        int count = RandomExtensions.GetRandomNumber(MinCount, Count);
 
         for (int i = 0; i < count; i++)
         {

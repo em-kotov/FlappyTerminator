@@ -1,10 +1,12 @@
 using UnityEngine;
 
-public class EnemySpawner : ZoneSpawner<Enemy>
+public class EnemySpawner : Spawner<Enemy>
 {
+    private float _positionOffset = -15f;
+
     protected override void Create(Vector3 position)
     {
-        int count = RandomExtensions.GetRandomNumber(1, Count);
+        int count = RandomExtensions.GetRandomNumber(MinCount, Count);
 
         for (int i = 0; i < count; i++)
         {
@@ -12,7 +14,7 @@ public class EnemySpawner : ZoneSpawner<Enemy>
             enemy.Killed += OnKilled;
             Vector3 enemyPosition = RandomExtensions.GetRandomPosition(position, Radius);
             enemy.transform.position = enemyPosition;
-            enemy.Initialize(enemyPosition, new Vector2(enemyPosition.x - 15f, enemyPosition.y));
+            enemy.Initialize(new Vector2(enemyPosition.x + _positionOffset, enemyPosition.y));
             AddActive(enemy);
         }
     }

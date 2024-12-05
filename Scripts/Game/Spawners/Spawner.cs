@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 
-public abstract class ZoneSpawner<T> : MonoBehaviour where T : MonoBehaviour
+public abstract class Spawner<T> : MonoBehaviour where T : MonoBehaviour
 {
     [SerializeField] protected T Prefab;
-    [SerializeField] private Transform[] _spawnerZones;
     [SerializeField] protected float Radius = 3f;
     [SerializeField] protected int Count = 3;
+    [SerializeField] protected int MinCount = 1;
     [SerializeField] protected PoolSpawner<T> Pool;
+    [SerializeField] private Transform[] _spawnerZones;
 
     protected HashSet<T> ActiveObjects = new HashSet<T>();
 

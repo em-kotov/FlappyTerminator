@@ -21,9 +21,9 @@ public class Enemy : MonoBehaviour, IInteractable
         _collisionRegister.StarFound -= OnStarFound;
     }
 
-    public void Initialize(Vector3 startPosition, Vector3 endPosition)
+    public void Initialize(Vector3 endPosition)
     {
-        _mover.Initialize(startPosition, endPosition);
+        _mover.Initialize(endPosition);
         _shoot.Activate();
     }
 

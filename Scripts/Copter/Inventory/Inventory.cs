@@ -3,6 +3,8 @@ using System;
 
 public class Inventory : MonoBehaviour
 {
+    private int _startCount = 0;
+
     public event Action<int> StarCountChanged;
 
     public int StarCount { get; private set; } = 0;
@@ -16,7 +18,7 @@ public class Inventory : MonoBehaviour
 
     public void Reset()
     {
-        StarCount = 0;
+        StarCount = _startCount;
         StarCountChanged?.Invoke(StarCount);
     }
 }

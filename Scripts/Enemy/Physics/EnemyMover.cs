@@ -3,7 +3,6 @@ using UnityEngine;
 public class EnemyMover : MonoBehaviour
 {
     [SerializeField] private float _speed = 1.3f;
-    [SerializeField] private Vector3 _startPosition = new Vector3(10f, 0f, 0f);
     [SerializeField] private Vector3 _endPosition = new Vector3(-10f, 0f, 0f);
 
     private void Update()
@@ -11,9 +10,8 @@ public class EnemyMover : MonoBehaviour
         Move();
     }
 
-    public void Initialize(Vector3 startPosition, Vector3 endPosition)
+    public void Initialize(Vector3 endPosition)
     {
-        _startPosition = startPosition;
         _endPosition = endPosition;
     }
 

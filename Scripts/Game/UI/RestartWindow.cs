@@ -1,18 +1,11 @@
 using System;
 using UnityEngine;
 
-public class RestartWindow : MonoBehaviour
+public class RestartWindow : Window
 {
-    [SerializeField] private CanvasGroup _restartPanel;
-
     private bool _isRestart = false;
 
     public event Action RestartClicked;
-
-    private void Awake()
-    {
-        SetPanelActive(false);
-    }
 
     public void OnGameOver()
     {
@@ -21,7 +14,7 @@ public class RestartWindow : MonoBehaviour
         _isRestart = true;
     }
 
-    public void OnRestarButtonClick()
+    public override void OnClick()
     {
         if (_isRestart)
         {
@@ -32,13 +25,10 @@ public class RestartWindow : MonoBehaviour
         }
     }
 
-    private void SetPanelActive(bool isActive)
+    protected override void SetPanelActive(bool isActive)
     {
-        int panelAlphaVisible = 1;
-        int panelAlphaTransparent = 0;
-
-        _restartPanel.alpha = isActive ? panelAlphaVisible : panelAlphaTransparent;
-        _restartPanel.interactable = isActive;
-        _restartPanel.blocksRaycasts = isActive;
+        base.SetPanelActive(isActive);
+        Panel.interactable = isActive;
+        Panel.blocksRaycasts = isActive;
     }
 }

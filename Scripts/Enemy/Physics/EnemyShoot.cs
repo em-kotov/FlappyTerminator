@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class EnemyShoot : Shoot
+public class EnemyShoot : BulletSpawner
 {
     [SerializeField] private float _fireInterval = 1.2f;
     [SerializeField] private float _bulletOffset = -4f;
@@ -16,7 +16,7 @@ public class EnemyShoot : Shoot
     public void Deactivate()
     {
         StopFireCoroutine();
-        DestroyAllBullets();
+        DestroyAllObjects();
     }
 
     private void StopFireCoroutine()
@@ -34,7 +34,7 @@ public class EnemyShoot : Shoot
 
         while (enabled)
         {
-            Bullet bullet = BulletSpawner.Pool.Get();
+            Bullet bullet = Pool.Pool.Get();
             bullet.SetEndPosition(new Vector2(transform.position.x + _bulletOffset, transform.position.y));
             bullet.SetStartPosition(transform.position);
             bullet.SetMoveCoroutine(StartCoroutine(MoveBullet(bullet)));

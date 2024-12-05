@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class PlayerShoot : Shoot
+public class PlayerShoot : BulletSpawner
 {
     [SerializeField] private Transform _shootTarget;
 
     public void FireBullet()
     {
-        Bullet bullet = BulletSpawner.Pool.Get();
+        Bullet bullet = Pool.Pool.Get();
         bullet.SetEndPosition(_shootTarget.position);
         bullet.SetStartPosition(transform.position);
         bullet.SetMoveCoroutine(StartCoroutine(MoveBullet(bullet)));
