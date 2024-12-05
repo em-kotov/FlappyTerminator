@@ -5,18 +5,19 @@ using System.Linq;
 
 public abstract class Spawner<T> : MonoBehaviour where T : MonoBehaviour
 {
-    [SerializeField] protected T Prefab;
     [SerializeField] protected float Radius = 3f;
     [SerializeField] protected int Count = 3;
     [SerializeField] protected int MinCount = 1;
     [SerializeField] protected PoolSpawner<T> Pool;
+
+    [SerializeField] private T _prefab;
     [SerializeField] private Transform[] _spawnerZones;
 
     protected HashSet<T> ActiveObjects = new HashSet<T>();
 
     private void Awake()
     {
-        Pool.SetPrefab(Prefab);
+        Pool.SetPrefab(_prefab);
     }
 
     public void Spawn()
@@ -25,7 +26,7 @@ public abstract class Spawner<T> : MonoBehaviour where T : MonoBehaviour
             Create(spawnerZone.position);
     }
 
-    public virtual void DestroyAllObjects()
+    public void DestroyAllObjects()
     {
         Array itemsToDestroy = ActiveObjects.ToArray();
 
@@ -44,11 +45,11 @@ public abstract class Spawner<T> : MonoBehaviour where T : MonoBehaviour
         }
     }
 
-    protected virtual void AddActive(T item)
+    protected virtual void Create(Vector3 position) { }
+
+    protected void AddActive(T item)
     {
         if (item != null && ActiveObjects.Contains(item) == false)
             ActiveObjects.Add(item);
     }
-
-    protected virtual void Create(Vector3 position) { }
 }

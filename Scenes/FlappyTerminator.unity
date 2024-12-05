@@ -334,11 +334,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3281872e9a1af4b45ace22d83c9cf63e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 1814837063336200609, guid: e7f7af2d9efafaf4cbcfc7b8f296cb75, type: 3}
   Radius: 3
   Count: 3
   MinCount: 1
   Pool: {fileID: 43368561}
+  _prefab: {fileID: 1814837063336200609, guid: e7f7af2d9efafaf4cbcfc7b8f296cb75, type: 3}
   _spawnerZones: []
   _bulletFlyTime: 0.5
   _shootTarget: {fileID: 878242577}
@@ -2450,11 +2450,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 552167292d56bad45889b687d414efed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 9159859323556780254, guid: 8ea2a4a33c9465b479db3ac2b4ef39a9, type: 3}
   Radius: 3
   Count: 2
   MinCount: 1
   Pool: {fileID: 747489266}
+  _prefab: {fileID: 9159859323556780254, guid: 8ea2a4a33c9465b479db3ac2b4ef39a9, type: 3}
   _spawnerZones:
   - {fileID: 1691727857}
   - {fileID: 2112749090}
@@ -3796,11 +3796,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 552167292d56bad45889b687d414efed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 9159859323556780254, guid: 8ea2a4a33c9465b479db3ac2b4ef39a9, type: 3}
   Radius: 3
   Count: 2
   MinCount: 1
   Pool: {fileID: 1184592777}
+  _prefab: {fileID: 9159859323556780254, guid: 8ea2a4a33c9465b479db3ac2b4ef39a9, type: 3}
   _spawnerZones:
   - {fileID: 1606861653}
   - {fileID: 384142416}
@@ -4595,11 +4595,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c91770fe103a79f4daf3da912cd47202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 9142697651531176282, guid: 37e3531257f8d104e90863999822a690, type: 3}
   Radius: 3
   Count: 3
   MinCount: 1
   Pool: {fileID: 1492597181}
+  _prefab: {fileID: 9142697651531176282, guid: 37e3531257f8d104e90863999822a690, type: 3}
   _spawnerZones:
   - {fileID: 1631390627}
   - {fileID: 142482107}
@@ -6159,11 +6159,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c91770fe103a79f4daf3da912cd47202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 9142697651531176282, guid: 37e3531257f8d104e90863999822a690, type: 3}
   Radius: 3
   Count: 3
   MinCount: 1
   Pool: {fileID: 2065190245}
+  _prefab: {fileID: 9142697651531176282, guid: 37e3531257f8d104e90863999822a690, type: 3}
   _spawnerZones:
   - {fileID: 926663230}
   - {fileID: 715814413}

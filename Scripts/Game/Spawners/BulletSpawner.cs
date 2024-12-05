@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BulletSpawner : Spawner<Bullet>
 {
-    [SerializeField] protected float _bulletFlyTime = 0.5f;
+    [SerializeField] private float _bulletFlyTime = 0.5f;
 
     protected override void DestroySingleItem(Bullet bullet)
     {

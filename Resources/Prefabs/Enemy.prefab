@@ -170,7 +170,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 1.3
-  _startPosition: {x: 10, y: 0, z: 0}
   _endPosition: {x: -10, y: 0, z: 0}
 --- !u!114 &7861275230137083637
 MonoBehaviour:
@@ -196,12 +195,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cb9b7c0a0760f743aa7300f1463030d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 3112718484020674752, guid: 8f33db11211e9f3468fb09275a291856, type: 3}
-  _spawnerZones: []
   Radius: 3
   Count: 3
+  MinCount: 1
   Pool: {fileID: 7228215278662202703}
-  _bulletSpeed: 0.5
+  _prefab: {fileID: 3112718484020674752, guid: 8f33db11211e9f3468fb09275a291856, type: 3}
+  _spawnerZones: []
+  _bulletFlyTime: 0.5
   _fireInterval: 1.2
   _bulletOffset: -4
 --- !u!114 &9159859323556780254
