@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3970012323401594974}
   - component: {fileID: 2850641560875297294}
   - component: {fileID: 327430362905860201}
-  - component: {fileID: 9142697651531176282}
+  - component: {fileID: 5606706973580721868}
   m_Layer: 11
   m_Name: Star
   m_TagString: Star
@@ -125,7 +125,7 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: -0.017555404}
   m_Radius: 0.3807549
---- !u!114 &9142697651531176282
+--- !u!114 &5606706973580721868
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -134,6 +134,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 925249371496006481}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03820f51f8cd59649a39188e95f9509d, type: 3}
+  m_Script: {fileID: 11500000, guid: 1988f2a9b33846f4ba51d53b8a93265d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Collected:
+    m_PersistentCalls:
+      m_Calls: []

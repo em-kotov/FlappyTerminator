@@ -27,11 +27,12 @@ public class Enemy : MonoBehaviour, IInteractable
         _shoot.Activate();
     }
 
-    public void OnShot()
+    public void OnShot(Bullet bullet)
     {
+        bullet.InvokeCollected();
         Killed?.Invoke(this);
     }
-    
+
     public void OnStarFound(Star star)
     {
         star.InvokeCollected();

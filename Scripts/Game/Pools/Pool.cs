@@ -1,31 +1,42 @@
 using UnityEngine;
 using UnityEngine.Pool;
 
-public abstract class PoolSpawner<T> : MonoBehaviour where T : MonoBehaviour
+public abstract class Pool<T> : MonoBehaviour where T : MonoBehaviour
 {
-    private T _prefab;
-    private int _poolCapacity = 10;
-    private int _poolMaxSize = 15;
+    [SerializeField] private int PoolCapacity = 10;
+    [SerializeField] private int PoolMaxSize = 15;
 
-    public ObjectPool<T> Pool { get; private set; }
+    private T _prefab;
+    private ObjectPool<T> _pool;
+
     public int TotalQuantity { get; private set; }
     public int CreatedQuantity { get; private set; }
     public int ActiveQuantity { get; private set; }
 
     private void Awake()
     {
-        Pool = new ObjectPool<T>(
+        _pool = new ObjectPool<T>(
             createFunc: () => OnCreate(),
             actionOnGet: (item) => OnGet(item),
             actionOnRelease: (item) => OnRelease(item),
             actionOnDestroy: (item) => Destroy(item.gameObject),
             collectionCheck: true,
-            defaultCapacity: _poolCapacity,
-            maxSize: _poolMaxSize);
+            defaultCapacity: PoolCapacity,
+            maxSize: PoolMaxSize);
 
         TotalQuantity = 0;
         CreatedQuantity = 0;
         ActiveQuantity = 0;
+    }
+
+    public T Get()
+    {
+        return _pool.Get();
+    }
+
+    public void Release(T item)
+    {
+        _pool.Release(item);
     }
 
     public void SetPrefab(T prefab)

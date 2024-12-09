@@ -8,8 +8,9 @@ public class StarSpawner : Spawner<Star>
 
         for (int i = 0; i < count; i++)
         {
-            Star star = Pool.Pool.Get();
-            star.Collected += OnCollected;
+            Star star = Pool.Get();
+            star.Initialize();
+            star.Collected.AddListener(OnCollected);
             star.transform.position = RandomExtensions.GetRandomPosition(position, Radius);
             AddActive(star);
         }
@@ -17,9 +18,8 @@ public class StarSpawner : Spawner<Star>
 
     private void OnCollected(Star star)
     {
-        if (star != null && ActiveObjects.Contains(star))
+        if (IsActive(star))
         {
-            star.Collected -= OnCollected;
             star.Deactivate();
             DestroySingleItem(star);
         }

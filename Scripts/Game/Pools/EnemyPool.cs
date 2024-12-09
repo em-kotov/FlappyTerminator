@@ -1,4 +1,4 @@
-public class EnemyPool : PoolSpawner<Enemy>
+public class EnemyPool : Pool<Enemy>
 {
    
 }

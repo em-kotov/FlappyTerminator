@@ -23,7 +23,7 @@ public class EnemyShoot : BulletSpawner
     {
         if (_fireCoroutine != null)
         {
-            StopCoroutine(FireBullet());
+            StopCoroutine(_fireCoroutine);
             _fireCoroutine = null;
         }
     }
@@ -34,10 +34,10 @@ public class EnemyShoot : BulletSpawner
 
         while (enabled)
         {
-            Bullet bullet = Pool.Pool.Get();
-            bullet.SetEndPosition(new Vector2(transform.position.x + _bulletOffset, transform.position.y));
-            bullet.SetStartPosition(transform.position);
-            bullet.SetMoveCoroutine(StartCoroutine(MoveBullet(bullet)));
+            Bullet bullet = Pool.Get();
+            bullet.Initialize(transform.position, new Vector2(transform.position.x
+                                + _bulletOffset, transform.position.y));
+            bullet.SaveCoroutine(StartCoroutine(MoveBullet(bullet)));
             AddActive(bullet);
 
             yield return wait;

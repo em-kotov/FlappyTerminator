@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7996501973106698950}
   - component: {fileID: 5372850035993116875}
   - component: {fileID: 489797915945467033}
-  - component: {fileID: 864943493391428064}
+  - component: {fileID: 4750264739172618132}
   m_Layer: 8
   m_Name: Pipe (2)
   m_TagString: Pipe
@@ -86,7 +86,7 @@ SpriteRenderer:
   m_Size: {x: 2, y: 6.4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!61 &489797915945467033
@@ -135,7 +135,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2, y: 6.4}
   m_EdgeRadius: 0
---- !u!114 &864943493391428064
+--- !u!114 &4750264739172618132
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 240144780346385326}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92f3425d932838e4ba09c1a66c22482b, type: 3}
+  m_Script: {fileID: 11500000, guid: 418cfa89807c0a042970a4c675061c65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7725678281663320257
@@ -158,7 +158,7 @@ GameObject:
   - component: {fileID: 1108453270464136237}
   - component: {fileID: 4593084962622541150}
   - component: {fileID: 3103066675363947536}
-  - component: {fileID: 5858982449179141203}
+  - component: {fileID: 2434635382316024299}
   m_Layer: 8
   m_Name: Ground
   m_TagString: Pipe
@@ -234,7 +234,7 @@ SpriteRenderer:
   m_Size: {x: 2, y: 6.4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!61 &3103066675363947536
@@ -283,7 +283,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2, y: 6.4}
   m_EdgeRadius: 0
---- !u!114 &5858982449179141203
+--- !u!114 &2434635382316024299
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -292,6 +292,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 7725678281663320257}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92f3425d932838e4ba09c1a66c22482b, type: 3}
+  m_Script: {fileID: 11500000, guid: 418cfa89807c0a042970a4c675061c65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

@@ -10,7 +10,7 @@ public class EnemySpawner : Spawner<Enemy>
 
         for (int i = 0; i < count; i++)
         {
-            Enemy enemy = Pool.Pool.Get();
+            Enemy enemy = Pool.Get();
             enemy.Killed += OnKilled;
             Vector3 enemyPosition = RandomExtensions.GetRandomPosition(position, Radius);
             enemy.transform.position = enemyPosition;
@@ -21,7 +21,7 @@ public class EnemySpawner : Spawner<Enemy>
 
     protected override void DestroySingleItem(Enemy enemy)
     {
-        if (enemy != null && ActiveObjects.Contains(enemy))
+        if (IsActive(enemy))
         {
             enemy.Deactivate();
             base.DestroySingleItem(enemy);
@@ -30,7 +30,7 @@ public class EnemySpawner : Spawner<Enemy>
 
     private void OnKilled(Enemy enemy)
     {
-        if (enemy != null && ActiveObjects.Contains(enemy))
+        if (IsActive(enemy))
         {
             enemy.Killed -= OnKilled;
             enemy.Deactivate();

@@ -7,16 +7,10 @@ public class BulletSpawner : Spawner<Bullet>
 
     protected override void DestroySingleItem(Bullet bullet)
     {
-        if (bullet != null && bullet.gameObject.activeInHierarchy && ActiveObjects.Contains(bullet))
+        if (IsActive(bullet))
         {
-            if (bullet.MoveCoroutine != null)
-            {
-                StopCoroutine(MoveBullet(bullet));
-                bullet.ResetMoveCoroutine();
-            }
-
-            ActiveObjects.Remove(bullet);
-            Pool.Pool.Release(bullet);
+            bullet.Deactivate();
+            base.DestroySingleItem(bullet);
         }
     }
 
@@ -32,10 +26,11 @@ public class BulletSpawner : Spawner<Bullet>
             yield return null;
         }
 
-        if (bullet != null)
-        {
-            bullet.ResetMoveCoroutine();
-            DestroySingleItem(bullet);
-        }
+        DestroySingleItem(bullet);
+    }
+
+    protected void OnCollected(Bullet bullet)
+    {
+        DestroySingleItem(bullet);
     }
 }

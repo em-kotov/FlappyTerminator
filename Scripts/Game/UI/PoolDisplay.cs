@@ -5,7 +5,7 @@ using TMPro;
 public abstract class PoolDisplay<T> : MonoBehaviour where T : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _metricsText;
-    [SerializeField] private PoolSpawner<T> _poolSpawner;
+    [SerializeField] private Pool<T> _pool;
 
     private Type _type;
 
@@ -22,8 +22,8 @@ public abstract class PoolDisplay<T> : MonoBehaviour where T : MonoBehaviour
     private void DisplayMetrics()
     {
         _metricsText.text = $"{_type.Name}\n" +
-                            $"Total: {_poolSpawner.TotalQuantity}\n" +
-                           $"Active: {_poolSpawner.ActiveQuantity}\n" +
-                           $"Created: {_poolSpawner.CreatedQuantity}";
+                            $"Total: {_pool.TotalQuantity}\n" +
+                           $"Active: {_pool.ActiveQuantity}\n" +
+                           $"Created: {_pool.CreatedQuantity}";
     }
 }

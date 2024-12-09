@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8255801869246813149}
-  - component: {fileID: 1005375533418574809}
+  - component: {fileID: 202611245302715072}
   m_Layer: 0
-  m_Name: BulletSpawner
+  m_Name: BulletPool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1005375533418574809
+--- !u!114 &202611245302715072
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,6 +41,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 7525426900322176203}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2e956af36b1a6d4988e33bf8903f5c0, type: 3}
+  m_Script: {fileID: 11500000, guid: bafb77a96dc5cf848a9c4489c69ca6fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PoolCapacity: 10
+  PoolMaxSize: 15

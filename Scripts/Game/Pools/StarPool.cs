@@ -1,4 +1,4 @@
-public class StarPool : PoolSpawner<Star>
+public class StarPool : Pool<Star>
 {
    
 }

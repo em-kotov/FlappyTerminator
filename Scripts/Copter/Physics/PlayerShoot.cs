@@ -6,10 +6,10 @@ public class PlayerShoot : BulletSpawner
 
     public void FireBullet()
     {
-        Bullet bullet = Pool.Pool.Get();
-        bullet.SetEndPosition(_shootTarget.position);
-        bullet.SetStartPosition(transform.position);
-        bullet.SetMoveCoroutine(StartCoroutine(MoveBullet(bullet)));
+        Bullet bullet = Pool.Get();
+        bullet.Collected.AddListener(OnCollected);
+        bullet.Initialize(transform.position, _shootTarget.position);
+        bullet.SaveCoroutine(StartCoroutine(MoveBullet(bullet)));
         AddActive(bullet);
     }
 }

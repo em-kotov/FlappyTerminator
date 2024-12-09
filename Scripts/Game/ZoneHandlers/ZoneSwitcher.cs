@@ -13,7 +13,7 @@ public class ZoneSwitcher : MonoBehaviour
         InitializeZones();
     }
 
-    public void SwitchToNext(ZoneController zoneController, float copterPositionX)
+    public void SwitchToNext(ZoneController zoneController)
     {
         zoneController.ClearAllObjects();
         zoneController.SetBackgroundPosition(_offset);

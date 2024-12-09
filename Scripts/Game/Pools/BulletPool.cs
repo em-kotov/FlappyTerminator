@@ -1,4 +1,4 @@
-public class BulletPool : PoolSpawner<Bullet> 
+public class BulletPool : Pool<Bullet> 
 {
    
 }

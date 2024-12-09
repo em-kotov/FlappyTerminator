@@ -8,12 +8,12 @@ public abstract class Spawner<T> : MonoBehaviour where T : MonoBehaviour
     [SerializeField] protected float Radius = 3f;
     [SerializeField] protected int Count = 3;
     [SerializeField] protected int MinCount = 1;
-    [SerializeField] protected PoolSpawner<T> Pool;
+    [SerializeField] protected Pool<T> Pool;
 
     [SerializeField] private T _prefab;
     [SerializeField] private Transform[] _spawnerZones;
 
-    protected HashSet<T> ActiveObjects = new HashSet<T>();
+    private HashSet<T> _activeObjects = new HashSet<T>();
 
     private void Awake()
     {
@@ -28,20 +28,20 @@ public abstract class Spawner<T> : MonoBehaviour where T : MonoBehaviour
 
     public void DestroyAllObjects()
     {
-        Array itemsToDestroy = ActiveObjects.ToArray();
+        Array itemsToDestroy = _activeObjects.ToArray();
 
         foreach (T item in itemsToDestroy)
             DestroySingleItem(item);
 
-        ActiveObjects.Clear();
+        _activeObjects.Clear();
     }
 
     protected virtual void DestroySingleItem(T item)
     {
-        if (item != null && item.gameObject.activeInHierarchy && ActiveObjects.Contains(item))
+        if(IsActive(item))
         {
-            ActiveObjects.Remove(item);
-            Pool.Pool.Release(item);
+            _activeObjects.Remove(item);
+            Pool.Release(item);
         }
     }
 
@@ -49,7 +49,12 @@ public abstract class Spawner<T> : MonoBehaviour where T : MonoBehaviour
 
     protected void AddActive(T item)
     {
-        if (item != null && ActiveObjects.Contains(item) == false)
-            ActiveObjects.Add(item);
+        if (item != null && _activeObjects.Contains(item) == false)
+            _activeObjects.Add(item);
+    }
+
+    protected bool IsActive(T item)
+    {
+        return item != null && item.gameObject.activeInHierarchy && _activeObjects.Contains(item);
     }
 }

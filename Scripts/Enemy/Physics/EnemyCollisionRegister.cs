@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class EnemyCollisionRegister : MonoBehaviour
 {
-    public event Action WasShot;
+    public event Action<Bullet> WasShot;
     public event Action<Star> StarFound;
 
     private void OnTriggerEnter2D(Collider2D collider)
@@ -11,10 +11,13 @@ public class EnemyCollisionRegister : MonoBehaviour
         if (collider.gameObject.TryGetComponent(out IInteractable interactable))
         {
             if (interactable is Bullet)
-                WasShot?.Invoke();
-
-            if (interactable is Star)
+            {
+                WasShot?.Invoke(interactable as Bullet);
+            }
+            else if (interactable is Star)
+            {
                 StarFound?.Invoke(interactable as Star);
+            }
         }
     }
 }

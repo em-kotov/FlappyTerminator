@@ -8,7 +8,7 @@ public class CollisionRegister : MonoBehaviour
     public event Action BulletFound;
     public event Action EnemyFound;
     public event Action<Star> StarFound;
-    public event Action<ZoneController, float> NextZoneControllerFound;
+    public event Action<ZoneController> NextZoneControllerFound;
 
     private void Awake()
     {
@@ -20,20 +20,25 @@ public class CollisionRegister : MonoBehaviour
         if (collider.gameObject.TryGetComponent(out IInteractable interactable))
         {
             if (interactable is Ground)
+            {
                 GroundFound?.Invoke();
-
-            if (interactable is Star)
+            }
+            else if (interactable is Star)
+            {
                 StarFound?.Invoke(interactable as Star);
-
-            if (interactable is ZoneController)
-                NextZoneControllerFound?.Invoke(interactable as ZoneController,
-                                                    transform.position.x);
-
-            if (interactable is Enemy)
+            }
+            else if (interactable is ZoneController)
+            {
+                NextZoneControllerFound?.Invoke(interactable as ZoneController);
+            }
+            else if (interactable is Enemy)
+            {
                 EnemyFound?.Invoke();
-
-            if (interactable is Bullet)
+            }
+            else if (interactable is Bullet)
+            {
                 BulletFound?.Invoke();
+            }
         }
     }
 }

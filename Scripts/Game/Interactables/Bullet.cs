@@ -1,28 +1,31 @@
 using UnityEngine;
 
-public class Bullet : MonoBehaviour, IInteractable
+public class Bullet : Collectible<Bullet>, IInteractable
 {
     public Vector2 EndPosition { get; protected set; }
     public Vector2 StartPosition { get; protected set; }
     public Coroutine MoveCoroutine { get; protected set; }
 
-    public void SetEndPosition(Vector2 endPosition)
+    public void Initialize(Vector2 startPosition, Vector2 endPosition)
     {
+        SetCollectibleItem(this);
+        StartPosition = startPosition;
         EndPosition = endPosition;
     }
-    
-    public void SetStartPosition(Vector2 startPosition)
-    {
-        StartPosition = startPosition;
-    }
-    
-    public void SetMoveCoroutine(Coroutine moveCoroutine)
+
+    public void SaveCoroutine(Coroutine moveCoroutine)
     {
         MoveCoroutine = moveCoroutine;
     }
 
-    public void ResetMoveCoroutine()
+    public override void Deactivate()
     {
-        MoveCoroutine = null;
+        if (MoveCoroutine != null)
+        {
+            StopCoroutine(MoveCoroutine);
+            MoveCoroutine = null;
+        }
+
+        base.Deactivate();
     }
 }
